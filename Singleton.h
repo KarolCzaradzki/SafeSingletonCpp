@@ -26,7 +26,6 @@ public:
     virtual ~Singleton() = default;
     
     static T* instance();
-    static void end();
 };
 
 template <typename T>
@@ -49,18 +48,6 @@ T* Singleton<T>::instance()
     }
     return instance_.get();
 }
-
-template <typename T>
-void Singleton<T>::end()
-{
-    std::lock_guard<std::mutex> lock(instanceLock);
-    if(instance_)
-    {
-        instance_ = new T;
-        return instance_;
-    }
-}
-
 
 
 #endif /* defined(__SolvedIOS__Singleton__) */
